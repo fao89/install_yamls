@@ -92,6 +92,11 @@ edpm_compute: ## Create EDPM compute VM
 	scripts/gen-ansibleee-ssh-key.sh
 	scripts/gen-edpm-compute-node.sh ${EDPM_COMPUTE_SUFFIX}
 
+.PHONY: director_standalone
+director_standalone: ## Configure director standalone VM
+	$(eval $(call vars))
+	scripts/standalone.sh ${EDPM_COMPUTE_SUFFIX}
+
 .PHONY: edpm_compute_repos
 edpm_compute_repos: ## Configure EDPM compute VM with repositories
 	$(eval $(call vars))
