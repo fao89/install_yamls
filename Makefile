@@ -1969,6 +1969,8 @@ horizon_kuttl: kuttl_common_prep horizon horizon_deploy_prep ## runs kuttl tests
 
 .PHONY: openstack_kuttl_run
 openstack_kuttl_run: ## runs kuttl tests for the openstack operator, assumes that everything needed for running the test was deployed beforehand.
+	# Kuttl tests require the SSH key secret to exist
+	devsetup/scripts/gen-ansibleee-ssh-key.sh
 	set -e; \
 	for test_dir in $(shell ls ${OPENSTACK_KUTTL_DIR}); do \
 	    oc delete osctlplane --all --namespace ${NAMESPACE}; \
